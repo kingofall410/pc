@@ -4,14 +4,16 @@ from api.serializers import VisitSerializer, UserSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
+from . import modelHandler
 
 class VisitList(generics.ListCreateAPIView):
     queryset = Visit.objects.all()
     serializer_class = VisitSerializer
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     
-    #def perform_create(self, serializer):
-     #  serializer.save(user=self.request.user);
+    def perform_create(self, serializer):
+        modelHandler.addOrUpdateVisit(serializer)
+        #serializer.save(user=self.request.user);
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
