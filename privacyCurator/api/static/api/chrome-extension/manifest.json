@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "Privacy Curator",
+  "description": "TBD",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "background": {
+    "scripts":["rest_framework/coreapi-0.1.0.js", "rest_framework/schema.js","background.js"]
+   },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "<all_urls>",
+    "storage"
+  ]
+}

@@ -1,0 +1,20 @@
+{% load static %}
+<script src="{% static 'rest_framework/js/coreapi-0.1.0.js' %}"></script>
+<script src="{% url 'api-docs:schema-js' %}"></script>
+<script>
+	const coreapi = window.coreapi;
+	const schema = window.schema;
+	var client = new coreapi.Client();
+	let action = ["visits", "create"];
+	let newTimer = new Date().getTime();
+	let params = {domain: "http://www.google.com", startTime: "2017-06-28T10:59:10Z", duration: 1.0};
+	client.action(schema, action, params).then(function(result) {
+	    console.log(result);
+	})
+	
+</script>
+<head>
+</head>
+<body>
+Hello world
+</body>
