@@ -4,7 +4,7 @@ Created on Jun 27, 2017
 @author: Dan
 '''
 from rest_framework import serializers
-from .models import Visit
+from .models import Visit, Source
 from django.contrib.auth.models import User
 
 class VisitSerializer(serializers.ModelSerializer):
@@ -15,7 +15,12 @@ class VisitSerializer(serializers.ModelSerializer):
         fields = ('user', 'domain', 'startTime', 'duration')
         
         
-
+class SourceSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Source
+        fields = ('sitename', 'domain', 'bias')
+        
 #    domain = serializers.CharField(max_length=200);
 #   startTime = serializers.DateTimeField();
 #    duration = serializers.FloatField();

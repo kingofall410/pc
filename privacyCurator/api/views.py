@@ -1,8 +1,12 @@
 from rest_framework import generics, permissions
-from api.models import Visit
-from api.serializers import VisitSerializer, UserSerializer
+from api.models import Visit, Source
+from api.serializers import VisitSerializer, UserSerializer, SourceSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from django.http import Http404
 
 from . import modelHandler
 
@@ -15,6 +19,29 @@ class VisitList(generics.ListCreateAPIView):
         modelHandler.addOrUpdateVisit(serializer)
         #serializer.save(user=self.request.user);
 
+class SubmitVisit(APIView):
+    
+    def get_object(self, d):
+        #print(d)
+        try:
+            print("trying")
+            #for source in list(Source.objects.all()):
+             #   print(source.domain)
+            s = Source.objects.filter(domain="http://www.thejustice.org/ ")
+            print(len(s))
+            for source in s:
+                print(source)
+            #print(s.domain)
+        except Source.DoesNotExist:
+            print("fail")
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        #print(pk)
+        source = self.get_object(pk+" ")
+        ser = SourceSerializer(source)
+        return Response(ser.data)
+    
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

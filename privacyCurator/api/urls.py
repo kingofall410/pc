@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
     url(r'^docs/', include_docs_urls(title="My API Service")),
     url(r'^test/', views.test, name='test'),
+    url(r'^visits/(.*)$', views.SubmitVisit.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

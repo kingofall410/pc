@@ -51,13 +51,13 @@ function logPageSwitch(domain, startTime, duration) {
 }
 
 function getDomain(url) {
-  let startIndex;
-  if (url.startsWith("http://")) {
-    startIndex = 7;
-  } else {
-    startIndex = 8;
+  let startIndex = url.indexOf("/")+2;
+  let endIndex = url.indexOf("/", startIndex);
+  let full = url.slice(startIndex, endIndex);
+  let firstdot = full.lastIndexOf(".", full.lastIndexOf(".")-1);
+  
+  if (firstdot != -1) {
+	var domain = full.slice(firstdot+1);
   }
-  let noproto = url.slice(startIndex, url.length+1);
-  let domain = noproto.slice(0, noproto.indexOf("/"));
   return domain;
 }

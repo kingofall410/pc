@@ -19,3 +19,4 @@ def addOrUpdateVisit(serializer):
         visit.save()
     else:
         serializer.save()
+        
